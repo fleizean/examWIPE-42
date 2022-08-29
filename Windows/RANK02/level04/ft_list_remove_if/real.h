@@ -1,0 +1,5 @@
+BİZ YAPMADIK SEN BUL
+
+¯\_( ͡❛ ͜ʖ ͡❛)_/¯
+
+BİZ YAPMADIK SEN BUL
