@@ -31,7 +31,7 @@ Hints:
 Do not leak file descriptors!
 
 
-ERRORS:
+ERROR COMM:
 error: cd: bad arguments
 error: cd: cannot change directory to path_to_change
 error: cannot execute executable_that_failed

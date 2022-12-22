@@ -10,7 +10,7 @@ https://github.com/Glagan/42-exam-rank-04/blob/master/microshell/test.sh*/
 // # define TEST		0
 // #endif
 
-int	ft_putstr_fd2(char *str, char *arg)
+int ft_putstr_fd2(char *str, char *arg)
 {
 	while(*str)
 		write(2, str++, 1);
@@ -21,13 +21,13 @@ int	ft_putstr_fd2(char *str, char *arg)
 	return(1);
 }
 
-int ft_execute(char *av[], int i, int tmp_fd, char *env[])
+int ft_execute(char **av, int i, int tmp_fd, char **env)
 {
 	av[i] = NULL;
 	dup2(tmp_fd, STDIN_FILENO);
 	close(tmp_fd);
 	execve(av[0], av, env);
-	return(ft_putstr_fd2("error: cannot execute ",av[0]));
+	return(ft_putstr_fd2("error: cannot execute ", av[0]));
 }
 
 int	main(int ac, char *av[], char *env[])
