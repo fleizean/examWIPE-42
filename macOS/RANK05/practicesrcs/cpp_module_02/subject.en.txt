@@ -1,4 +1,4 @@
-
+--------------------------------------------------------------------------------
 Assignment name  : cpp_module_02
 Expected files   : Warlock.cpp Warlock.hpp
                    ASpell.hpp ASpell.cpp

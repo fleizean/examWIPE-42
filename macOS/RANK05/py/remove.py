@@ -3,7 +3,7 @@ from importlib.resources import path
 import os, glob
 
 # Extensions
-extensions = [".cpp", ".hpp", ".txt", ".out"]
+extensions = [".cpp", ".hpp", ".txt", ".out", ".gch"]
 
 # Practice Sources
 cpp_module_00 = "practicesrcs/cpp_module_00"
