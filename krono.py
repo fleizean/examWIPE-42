@@ -3,6 +3,7 @@ from tkinter import *
 from threading import Thread
 from tkinter.messagebox import showinfo
 import time,tkinter.messagebox
+import pygame
 
 class Timer(Thread):
     over=False
@@ -79,6 +80,11 @@ def stp():
     sec=0;show()
     if t: t.kill()
     t=None
+def msc():
+    pygame.init()
+    pygame.mixer.music.load('biromuryetmez.mp3')
+    pygame.mixer.music.play(-1)
+    pygame.mixer.music.set_volume(0.4)
 
 en1 = Entry (root, textvariable = e1 ,width=10 ,justify=RIGHT)
 en2 = Entry (root, textvariable = e2 ,width=10)
@@ -87,6 +93,8 @@ stbtn = Button(root ,width=10,text= 'start',command =st)
 cdbtn = Button(root ,width=10,text= 'countdown',command =cd)
 pusbtn = Button(root ,width=10,text= 'pause',command =pus)
 stpbtn = Button(root ,width=10,text= 'stop',command =stp)
+mscbtn = Button(root ,width=10,text= 'music',command =msc)
+
 
 en1.grid(row = 0 ,column = 0,)
 lb .grid(row = 0 ,column = 1)
@@ -95,5 +103,7 @@ stbtn.grid(row = 1 ,column = 0)
 cdbtn.grid(row = 1 ,column = 2)
 pusbtn.grid(row = 2 ,column = 0)
 stpbtn.grid(row = 2 ,column = 2)
+mscbtn.grid(row = 3 ,column = 3)
+
 root.geometry('+500+400')
 root.mainloop ()
