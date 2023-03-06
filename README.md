@@ -25,6 +25,7 @@ bash tester.sh
 
 # Windows Alternatif
 python remove.py
+python3 remove.py
 ```
 
 # Yakında Yapmayı Planladığım Tool'lar
