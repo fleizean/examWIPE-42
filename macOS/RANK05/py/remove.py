@@ -3,12 +3,48 @@ from importlib.resources import path
 import os, glob
 
 # Extensions
-extensions = [".cpp", ".hpp", ".txt", ".out", ".gch"]
+extensions = [".cpp", ".hpp", ".txt", ".out", ".gch", ".o"]
 
 # Practice Sources
 cpp_module_00 = "practicesrcs/cpp_module_00"
 cpp_module_01 = "practicesrcs/cpp_module_01"
 cpp_module_02 = "practicesrcs/cpp_module_02"
+
+# Makefile
+makefile = """SRCS = $(wildcard *.cpp)
+
+CC = clang++
+NAME = execute
+
+CFLANG = -Wall -Wextra -Werror -std=c++98
+OBJS = $(SRCS:.cpp=.o)
+
+GREEN = \033[1;32m
+RED = \033[1;31m
+GREY = \033[2;37m
+MAGENTA = \033[0;35m
+RESET = \033[m
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	$(CC) $(CFLAG) -o $(NAME) $(OBJS)
+	@echo "$(NAME): $(GREEN)object files created$(RESET)"
+	@echo "$(NAME): $(GREEN)$(NAME) compiled$(RESET)"
+
+clean:
+	rm -f $(OBJS)
+	@echo "$(NAME): $(RED)$(OBJS) deleted$(RESET)"
+	@echo "$(NAME): $(RED)object files deleted$(RESET)"
+
+fclean: clean
+	rm -f $(NAME)
+	@rm -f $(NAME)
+	@echo "$(NAME): $(RED)$(NAME) deleted$(RESET)"
+
+re: fclean all
+
+.PHONY: all clean fclean re"""
 
 # Subjects
 subject_00 = """--------------------------------------------------------------------------------
@@ -285,6 +321,10 @@ create_subject00 = r"practicesrcs/cpp_module_00/subject.en.txt"
 create_subject01 = r"practicesrcs/cpp_module_01/subject.en.txt"
 create_subject02 = r"practicesrcs/cpp_module_02/subject.en.txt"
 
+create_makefile00 = r"practicesrcs/cpp_module_00/Makefile"
+create_makefile01 = r"practicesrcs/cpp_module_01/Makefile"
+create_makefile02 = r"practicesrcs/cpp_module_02/Makefile"
+
 def module_00_reset():
     dosyalar = os.listdir(cpp_module_00)
     for dosya in dosyalar:
@@ -293,7 +333,14 @@ def module_00_reset():
           dosya_yolu = os.path.join(cpp_module_00, dosya)
           os.remove(dosya_yolu)
           print(f"{dosya} silindi.")
+    execute_path = cpp_module_00 + "/execute"
+    if os.path.isfile(execute_path):
+        os.remove(execute_path)
+        print("execute dosyası silindi.")
     os.system("clear")
+    filemake = open(create_makefile00, "w")
+    filemake.write(makefile)
+    filemake.close()
     file = open(create_subject00, "w")
     file.write(subject_00)
     file.close()
@@ -307,7 +354,14 @@ def module_01_reset():
           dosya_yolu = os.path.join(cpp_module_01, dosya)
           os.remove(dosya_yolu)
           print(f"{dosya} silindi.")
+    execute_path = cpp_module_01 + "/execute"
+    if os.path.isfile(execute_path):
+        os.remove(execute_path)
+        print("execute dosyası silindi.")
     os.system("clear")
+    filemake = open(create_makefile01, "w")
+    filemake.write(makefile)
+    filemake.close()
     file = open(create_subject01, "w")
     file.write(subject_01)
     file.close()
@@ -321,7 +375,14 @@ def module_02_reset():
           dosya_yolu = os.path.join(cpp_module_02, dosya)
           os.remove(dosya_yolu)
           print(f"{dosya} silindi.")
+    execute_path = cpp_module_02 + "/execute"
+    if os.path.isfile(execute_path):
+        os.remove(execute_path)
+        print("execute dosyası silindi.")
     os.system("clear")
+    filemake = open(create_makefile02, "w")
+    filemake.write(makefile)
+    filemake.close()
     file = open(create_subject02, "w")
     file.write(subject_02)
     file.close()
@@ -340,6 +401,22 @@ def subjects_reset():
   file3.write(subject_02)
   file3.close()
   print("Subjectler başarılı şekilde oluşturuldu.")
+
+def makefiles_reset():
+  filemake = open(create_makefile00, "w")
+  filemake.write(makefile)
+  filemake.close()
+
+  filemake = open(create_makefile01, "w")
+  filemake.write(makefile)
+  filemake.close()
+
+  filemake = open(create_makefile02, "w")
+  filemake.write(makefile)
+  filemake.close()
+  print("Makfilelar başarılı şekilde oluşturuldu.")
+
+
 while(1):
     os.system("clear")
     print("----------- examWIPE -----------")
@@ -348,7 +425,8 @@ while(1):
     print("3- Module_02'ı resetle")
     print("4- Hepsini resetle")
     print("5- Subject dosyalarını oluştur")
-    print("6- Exit")
+    print("6- Makefile dosyalarını oluştur")
+    print("7- Exit")
     print("--------------------------------")
     secim = input("Seçim Numarınızı Giriniz: ")
     
@@ -365,9 +443,12 @@ while(1):
     elif secim == "5":
         subjects_reset()
     elif secim == "6":
+        makefiles_reset()
+    elif secim == "7":
         exit()
     else:
         print("Yanlış seçim numarası girdiniz.")
-        exit()
+        time.sleep(3)
+        os.system("clear")
 
 
