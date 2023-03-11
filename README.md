@@ -30,4 +30,4 @@ python3 remove.py
 
 # Yakında Yapmayı Planladığım Tool'lar
 
-> mini exam training tool, bu tool ile mini bir exam sınava girermiş gibi işlemleri uygulayıp çalışabileceğiniz bir tool.
+> Exam simulation tool soon. [GitHub Page](https://github.com/fleizean/examWIPESHELL).
