@@ -1,35 +1,22 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   SpellBook.hpp                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ncolomer <ncolomer@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/04 12:51:10 by ncolomer          #+#    #+#             */
-/*   Updated: 2020/02/11 11:56:59 by ncolomer         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#pragma once
 
-#ifndef SPELLBOOK_HPP
-# define SPELLBOOK_HPP
-
-# include <vector>
-# include "ASpell.hpp"
+#include "ASpell.hpp"
+#include <map>
 
 class SpellBook
 {
-private:
-	std::vector<ASpell*> spells;
+    private:
+        std::map<std::string, ASpell *> arr_spell;
 
-	SpellBook(SpellBook const &other);
-	SpellBook &operator=(SpellBook const &other);
-public:
-	SpellBook();
-	virtual ~SpellBook();
+        SpellBook(SpellBook const &other);
+        SpellBook &operator=(SpellBook const &other);
 
-	void learnSpell(ASpell *spell);
-	void forgetSpell(std::string const &spellName);
-	ASpell *generateSpell(std::string const &spellName);
+    public:
+        SpellBook();
+        ~SpellBook();
+
+        void learnSpell(ASpell *aspell_ptr);
+        void forgetSpell(std::string const &name);
+        ASpell* createSpell(std::string const &name);
+
 };
-
-#endif

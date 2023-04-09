@@ -1,27 +1,12 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Polymorph.hpp                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ncolomer <ncolomer@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/04 12:48:20 by ncolomer          #+#    #+#             */
-/*   Updated: 2020/02/04 13:00:59 by ncolomer         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#pragma once
 
-#ifndef POLYMORPH_HPP
-# define POLYMORPH_HPP
-
-# include "ASpell.hpp"
+#include "ASpell.hpp"
 
 class Polymorph: public ASpell
 {
-public:
-	Polymorph();
-	virtual ~Polymorph();
+    public:
+        Polymorph();
+        ~Polymorph();
 
-	virtual ASpell *clone(void) const;
+        virtual ASpell *clone() const;
 };
-
-#endif

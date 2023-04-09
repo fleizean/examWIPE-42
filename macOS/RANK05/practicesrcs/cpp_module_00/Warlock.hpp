@@ -1,7 +1,11 @@
-#ifndef WARLOCK_HPP
-#define WARLOCK_HPP
+#pragma once
 
 #include <iostream>
+#include <string>
+#include <map>
+
+#include "ASpell.hpp"
+#include "ATarget.hpp"
 
 class Warlock
 {
@@ -20,7 +24,6 @@ public:
     std::string const &getTitle() const;
 
     void setTitle(std::string const &title);
+
     void introduce() const;
 };
-
-#endif

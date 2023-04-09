@@ -1,32 +1,21 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   TargetGenerator.hpp                                :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ncolomer <ncolomer@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/04 12:59:50 by ncolomer          #+#    #+#             */
-/*   Updated: 2020/02/13 16:42:37 by ncolomer         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#pragma once
 
-#ifndef TARGETGENERATOR_HPP
-# define TARGETGENERATOR_HPP
-
-# include <vector>
-# include "ATarget.hpp"
+#include "ATarget.hpp"
+#include <map>
 
 class TargetGenerator
 {
-private:
-	std::vector<ATarget*> types;
-public:
-	TargetGenerator();
-	virtual ~TargetGenerator();
+    private:
+        std::map<std::string, ATarget *> arr_target;
 
-	void learnTargetType(ATarget *type);
-	void forgetTargetType(std::string const &name);
-	ATarget *createTarget(std::string const &name);
+        TargetGenerator(TargetGenerator const &other);
+        TargetGenerator &operator=(TargetGenerator const &other);
+
+    public:
+        TargetGenerator();
+        ~TargetGenerator();
+
+        void learnTargetType(ATarget *target_ptr);
+        void forgetTargetType(std::string const &name);
+        ATarget* createTarget(std::string const &name);
 };
-
-#endif

@@ -46,6 +46,81 @@ re: fclean all
 
 .PHONY: all clean fclean re"""
 
+# Mains
+module_00_main = """
+#include "Warlock.hpp"
+
+int main()
+{
+  Warlock const richard("Richard", "Mistress of Magma");
+  richard.introduce();
+  std::cout << richard.getName() << " - " << richard.getTitle() << std::endl;
+
+  Warlock* jack = new Warlock("Jack", "the Long");
+  jack->introduce();
+  jack->setTitle("the Mighty");
+  jack->introduce();
+
+  delete jack;
+
+  return (0);
+}
+"""
+
+module_01_main = """
+#include "Warlock.hpp"
+#include "Dummy.hpp"
+#include "Fwoosh.hpp"
+
+int main()
+{
+  Warlock richard("Richard", "the Titled");
+
+  Dummy bob;
+  Fwoosh* fwoosh = new Fwoosh();
+
+  richard.learnSpell(fwoosh);
+
+  richard.introduce();
+  richard.launchSpell("Fwoosh", bob);
+
+  richard.forgetSpell("Fwoosh");
+  richard.launchSpell("Fwoosh", bob);
+}
+"""
+
+module_02_main = """
+#include "Warlock.hpp"
+#include "Dummy.hpp"
+#include "BrickWall.hpp"
+#include "Fwoosh.hpp"
+#include "Fireball.hpp"
+#include "Polymorph.hpp"
+#include "TargetGenerator.hpp"
+
+int main()
+{
+  Warlock richard("Richard", "foo");
+  richard.setTitle("Hello, I'm Richard the Warlock!");
+  BrickWall model1;
+
+  Polymorph* polymorph = new Polymorph();
+  TargetGenerator tarGen;
+
+  tarGen.learnTargetType(&model1);
+  richard.learnSpell(polymorph);
+
+  Fireball* fireball = new Fireball();
+
+  richard.learnSpell(fireball);
+
+  ATarget* wall = tarGen.createTarget("Inconspicuous Red-brick Wall");
+
+  richard.introduce();
+  richard.launchSpell("Polymorph", *wall);
+  richard.launchSpell("Fireball", *wall);
+}
+"""
 # Subjects
 subject_00 = """--------------------------------------------------------------------------------
 Assignment name  : cpp_module_00
@@ -120,14 +195,14 @@ int main()
 }
 
 ~$ ./a.out | cat -e
-Richard: This looks like another boring day.$
-Richard: I am Richard, Mistress of Magma!$
-Richard - Mistress of Magma$
-Jack: This looks like another boring day.$
-Jack: I am Jack, the Long!$
-Jack: I am Jack, the Mighty!$
-Jack: My job here is done!$
-Richard: My job here is done!$
+Richard: This looks like another boring day.
+Richard: I am Richard, Mistress of Magma!
+Richard - Mistress of Magma
+Jack: This looks like another boring day.
+Jack: I am Jack, the Long!
+Jack: I am Jack, the Mighty!
+Jack: My job here is done!
+Richard: My job here is done!
 ~$
 """
 
@@ -222,10 +297,10 @@ int main()
 }
 
 ~$ ./a.out | cat -e
-Richard: This looks like another boring day.$
-Richard: I am Richard, the Titled!$
-Target Practice Dummy has been fwooshed!$
-Richard: My job here is done!$
+Richard: This looks like another boring day.
+Richard: I am Richard, the Titled!
+Target Practice Dummy has been fwooshed!
+Richard: My job here is done!
 """
 
 subject_02 = """--------------------------------------------------------------------------------
@@ -309,11 +384,11 @@ int main()
 }
 
 ~$ ./a.out | cat -e
-Richard: This looks like another boring day.$
-Richard: I am Richard, Hello, I'm Richard the Warlock!!$
-Inconspicuous Red-brick Wall has been turned into a critter!$
-Inconspicuous Red-brick Wall has been burnt to a crisp!$
-Richard: My job here is done!$
+Richard: This looks like another boring day.
+Richard: I am Richard, Hello, I'm Richard the Warlock!!
+Inconspicuous Red-brick Wall has been turned into a critter!
+Inconspicuous Red-brick Wall has been burnt to a crisp!
+Richard: My job here is done!
 ~$
 """
 
@@ -324,6 +399,10 @@ create_subject02 = r"practicesrcs/cpp_module_02/subject.en.txt"
 create_makefile00 = r"practicesrcs/cpp_module_00/Makefile"
 create_makefile01 = r"practicesrcs/cpp_module_01/Makefile"
 create_makefile02 = r"practicesrcs/cpp_module_02/Makefile"
+
+create_main00 = r"practicesrcs/cpp_module_00/main.cpp"
+create_main01 = r"practicesrcs/cpp_module_01/main.cpp"
+create_main02 = r"practicesrcs/cpp_module_02/main.cpp"
 
 def module_00_reset():
     dosyalar = os.listdir(cpp_module_00)
@@ -344,6 +423,9 @@ def module_00_reset():
     file = open(create_subject00, "w")
     file.write(subject_00)
     file.close()
+    main = open(create_main00, "w")
+    main.write(module_00_main)
+    main.close()
     print("Module_00 başarılı şekilde resetlendi.")
 
 def module_01_reset():
@@ -365,6 +447,9 @@ def module_01_reset():
     file = open(create_subject01, "w")
     file.write(subject_01)
     file.close()
+    main = open(create_main01, "w")
+    main.write(module_01_main)
+    main.close()
     print("Module_01 başarılı şekilde resetlendi.")
 
 def module_02_reset():
@@ -386,6 +471,9 @@ def module_02_reset():
     file = open(create_subject02, "w")
     file.write(subject_02)
     file.close()
+    main = open(create_main02, "w")
+    main.write(module_02_main)
+    main.close()
     print("Module_02 başarılı şekilde resetlendi.")
 
 def subjects_reset():
@@ -416,6 +504,19 @@ def makefiles_reset():
   filemake.close()
   print("Makfilelar başarılı şekilde oluşturuldu.")
 
+def mains_reset():
+  main1 = open(create_main00, "w")
+  main1.write(module_00_main)
+  main1.close()
+
+  main2 = open(create_main01, "w")
+  main2.write(module_01_main)
+  main2.close()
+
+  main3 = open(create_main02, "w")
+  main3.write(module_02_main)
+  main3.close()
+  print("Mainler başarılı şekilde oluşturuldu.")
 
 while(1):
     os.system("clear")
@@ -426,7 +527,8 @@ while(1):
     print("4- Hepsini resetle")
     print("5- Subject dosyalarını oluştur")
     print("6- Makefile dosyalarını oluştur")
-    print("7- Exit")
+    print("7- Main dosyalarını oluştur")
+    print("8- Exit")
     print("--------------------------------")
     secim = input("Seçim Numarınızı Giriniz: ")
     
@@ -445,6 +547,8 @@ while(1):
     elif secim == "6":
         makefiles_reset()
     elif secim == "7":
+        mains_reset()
+    elif secim == "8":
         exit()
     else:
         print("Yanlış seçim numarası girdiniz.")
