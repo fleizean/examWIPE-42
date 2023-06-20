@@ -502,7 +502,7 @@ def makefiles_reset():
   filemake = open(create_makefile02, "w")
   filemake.write(makefile)
   filemake.close()
-  print("Makfilelar başarılı şekilde oluşturuldu.")
+  print("Makefilelar başarılı şekilde oluşturuldu.")
 
 def mains_reset():
   main1 = open(create_main00, "w")
